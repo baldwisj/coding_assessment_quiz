@@ -2,28 +2,28 @@ const questions = [
     {
         question: "Objects in JavaScript are always enclosed by what?",
         answers: ['Square Brakets', 'Parentheses', 'Quotes', 'Curly Brakets'],
-        correctAsr: 3
+        correctAsr: 'Curly Brakets'
 
     },
     {
         question: "What JavaScript method allows you to use CSS selectors?",
         answers: ['.addEventListener', '.querySelector', 'getElementbyId', '.setAttribute'],
-        correctAsr: 1
+        correctAsr: '.querySelector'
     },
     {
         question: "What is the other piece to an 'if' statement?",
         answers: ['Else', 'When', 'Otherwise', 'For'],
-        correctAsr: 0
+        correctAsr: 'Else'
     },
     {
         question: "How do you define a global variable?",
         answers: ['const', 'let', 'var', 'global'],
-        correctAsr: 0
+        correctAsr: 'const'
     },
     {
         question: "When compaing two variables, which of the following means 'or'?",
         answers: ['&&', '!==', '||', '<='],
-        correctAsr: 2
+        correctAsr: '||'
     }] //Objects containing each question, the four possible answers, and the correct index
 
 
@@ -65,9 +65,9 @@ function countdown() {
         timer--;
         clock.textContent = timer + " Seconds Remaining";
 
-        if (timer === 0) {
+        if (timer <= 0) {
             gameOver()
-        }
+        };
     }, 1000);
 }
 
@@ -82,27 +82,31 @@ function nextQuestion() {
 
     //This function creates buttons for each string in the second indexed array (answers) in the object
 
-    for (var i = 0; i < questions[quizQuestion].answers.length; i++) {
-        var btn = document.createElement("button");
+    for (let i = 0; i < questions[quizQuestion].answers.length; i++) {
+        let btn = document.createElement("button");
         btn.textContent = questions[quizQuestion].answers[i]
 
         btn.addEventListener('click', function () {
             const answerSelect = this.textContent;
 
             if (rightAns !== answerSelect) {
-                timer -= 10
+                timer -= 10;
+                score -= 10;
                 clock.textContent = timer + " Seconds Remaining";
+            } else {
+                score = score + 10;
             }
             quizQuestion++;
-            if (quizQuestion === questions.length || timer <= 0) {
+            console.log(score);
+             if (quizQuestion === questions.length || timer <= 0) {
                 gameOver()
             }
             else {
                 nextQuestion()
-            }
+            };
 
         })
-        buttonDivEl.append(btn)
+        buttonDivEl.append(btn);
     }
 
 
@@ -115,8 +119,49 @@ function nextQuestion() {
 
 
 function gameOver(){
+    qstAndAswers.innerHTML = '';
     clearInterval(timerInterval);
-}
+    let formEl = document.createElement("form");
+    let h3El = document.createElement("h3");
+    let intImput = document.createElement("input");
+    let submitBtn = document.createElement("button");
+    let submitP = document.createElement("p");
+    formEl.setAttribute("method", "post");
+    formEl.setAttribute("action", "submit.php");
+    intImput.setAttribute("type","text");
+    intImput.setAttribute("name", "initials");
+    intImput.setAttribute("placeholder", "Initials");
+    intImput.setAttribute("id", "initialsForm")
+    submitBtn.setAttribute("value", "Submit");
+    submitBtn.setAttribute("id", "submitScoreId")
+    submitBtn.setAttribute("onclick", "./scores.html")
+    h3El.setAttribute("id", "scoreValue")
+
+    formEl.appendChild(intImput);
+    formEl.appendChild(submitBtn);
+
+    submitP.textContent = "Enter your initials to save your HighScore."
+    submitBtn.textContent = "Submit"
+    h3El.textContent = "Your score is " + score;
+    qstAndAswers.append(h3El);
+    qstAndAswers.append(formEl);
+    qstAndAswers.append(submitP);
+
+
+    const highScoreInitials = document.getElementById("initialsForm");
+ 
+    scoreSubmit.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        const studentScore = {
+            initals: highScoreInitials.value.trim(),
+            scores: score,
+        }
+
+        localStorage.setItem('initialsForm',JSON.stringify(getInitials));
+        
+    })
+};
 
 //This function initiates the event after the start quiz button is clicked
 startBtn.addEventListener("click", start);
