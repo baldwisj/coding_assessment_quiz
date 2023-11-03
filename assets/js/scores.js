@@ -1,8 +1,14 @@
-const initialDisplay = document.getElementById("user-initials");
+const userSet = document.getElementById('user-initials')
 
 function renderScores() {
-    const renderInitials = localStorage.getItem('initialsForm',JSON.parse(getInitials));
+    const renderInitials = JSON.parse(localStorage.getItem('initialsForm'));
+    console.log(renderInitials);
+    const indiv = document.createElement("li");
+    userSet.append(indiv);
+    indiv.setAttribute("id", "scoreList");
+    const userListItem = document.getElementById("scoreList");
     
-
-    initialDisplay.textContent = renderInitials;
+    userListItem.innerHTML = renderInitials.initials + " " + renderInitials.scores;
+    
 }
+renderScores();
