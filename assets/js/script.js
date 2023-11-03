@@ -126,15 +126,12 @@ function gameOver(){
     let intImput = document.createElement("input");
     let submitBtn = document.createElement("button");
     let submitP = document.createElement("p");
-    formEl.setAttribute("method", "post");
-    formEl.setAttribute("action", "submit.php");
     intImput.setAttribute("type","text");
     intImput.setAttribute("name", "initials");
     intImput.setAttribute("placeholder", "Initials");
     intImput.setAttribute("id", "initialsForm")
     submitBtn.setAttribute("value", "Submit");
     submitBtn.setAttribute("id", "submitScoreId")
-    submitBtn.setAttribute("onclick", "./scores.html")
     h3El.setAttribute("id", "scoreValue")
 
     formEl.appendChild(intImput);
@@ -150,16 +147,16 @@ function gameOver(){
 
     const highScoreInitials = document.getElementById("initialsForm");
  
-    scoreSubmit.addEventListener("click", function(event) {
+    submitBtn.addEventListener("click", function(event) {
         event.preventDefault();
 
         const studentScore = {
-            initals: highScoreInitials.value.trim(),
+            initials: highScoreInitials.value.trim(),
             scores: score,
         }
 
-        localStorage.setItem('initialsForm',JSON.stringify(getInitials));
-        
+        localStorage.setItem('initialsForm',JSON.stringify(studentScore));
+        window.location.href = "scores.html";
     })
 };
 
