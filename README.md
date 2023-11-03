@@ -20,3 +20,9 @@ Durning my creation of this webpage I have learned and sharpened many of my codi
 * I created DOM elements through Javascript to animate my webpage.
 
 * I acheived a better understanding of objects and dta attributes.
+
+## Screenshot
+![Full-Screenshot](./assets/images/website_screenshot.png)
+
+## Links
+https://baldwisj.github.io/coding_assessment_quiz/
