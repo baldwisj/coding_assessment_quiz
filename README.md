@@ -22,7 +22,7 @@ Durning my creation of this webpage I have learned and sharpened many of my codi
 * I acheived a better understanding of objects and dta attributes.
 
 ## Screenshot
-![Full-Screenshot](./assets/images/website_screenshot.png)
+![Full-Screenshot](./assets/images/websiteScreenshot.png)
 
 ## Links
 https://baldwisj.github.io/coding_assessment_quiz/
